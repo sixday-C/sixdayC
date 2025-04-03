@@ -1,0 +1,177 @@
+---
+title: "南大PA0"
+description: "‘我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, `大学`的灵魂也就在于超越世俗, 超越时代的纯真和理想’"
+pubDate: "Apr 03 2025"
+image: /image/drama/1.jpg
+categories:
+  - tech
+badge: Pin
+tag:
+    -system
+    -南大PA
+---
+
+# 南大PA
+## 课程链接
+([南大PA](https://nju-projectn.github.io/ics-pa-gitbook/ics2024/index.html))
+## 为什么要学计算机系统基础
+```cpp
+volatile double d[ 1 ] = { 3.14 }; volatile long int a[ 2 ];
+```
+volatile (容易变化的)是 C 和 C++ 编程语言中的一个类型修饰符。它用于告诉编译器，变量的值可能会在程序的执行过程中被意外地改变，因此编译器不应对这些变量进行优化。
+硬件寄存器：在直接操作硬件时，寄存器的值可能会在程序运行时由外部设备改变。
+多线程编程：当多个线程同时访问某个变量时，一个线程对该变量的修改可能会影响其他线程的读取。
+信号处理：在信号处理函数中，信号处理程序可能会改变某些变量的值，导致主程序中的值不一致。
+## 课程介绍
+### 鸡汤
+> 小百合系版"有像我一样不会写代码的cser么?"回复节选.
+
+>> 我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么.  
+ 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, "大学"的灵魂也就在于超越世俗, 超越时代的纯真和理想  
+-- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量.  
+>> — <cite>jyy</cite>
+
+>> 教育除了知识的记忆之外, 更本质的是能力的训练, 即所谓的training. 而但凡training就必须克服一定的难度, 否则你就是在做重复劳动,  
+能力也不会有改变.  
+如果遇到难度就选择退缩, 或者让别人来替你克服本该由你自己克服的难度, 等于是自动放弃了获得training的机会,  
+而这其实是大学专业教育最宝贵的部分.  
+>> — <cite>etone</cite>
+
+>> 这种"只要不影响我现在survive, 就不要紧"的想法其实非常的利己和短视:  
+你在专业上的技不如人, 迟早有一天会找上来, 会影响到你个人职业生涯的长远的发展;  
+ 更严重的是, 这些以得过且过的态度来对待自己专业的学生, 他们的survive其实是以透支南大教育的信誉为代价的--如果我们一定比例的毕业生都是这种情况, 那么过不了多久, 不但那些混到毕业的学生也没那么容易survive了,  
+ 而且那些真正自己刻苦努力的学生, 他们的前途也会受到影响.  
+>> — <cite>etone</cite>
+
+### 计算机架构
+```
+x86、MIPS32 和 RISC-V32 都是不同的计算机架构，主要用于不同类型的处理器。它们的关系可以从它们的用途和发展历史来看：
+
+x86：
+
+x86 是一种由英特尔（Intel）开发的指令集架构（ISA），广泛用于个人电脑和服务器中。它的历史可以追溯到1978年，最初是针对16位处理器设计的，现在已经发展到64位（例如 x86-64）。
+MIPS32：
+
+MIPS（Microprocessor without Interlocked Pipeline Stages）是一种RISC（Reduced Instruction Set Computing）架构，MIPS32 是其32位版本。MIPS 处理器常用于嵌入式系统、路由器和一些高性能计算环境。MIPS 技术于1980年代首次推出，相比x86结构较为简洁。
+RISC-V：
+
+RISC-V 是一种开放源代码的指令集架构，旨在促进研究和教学。和MIPS一样，RISC-V也是RISC架构，但它是近年来新发展起来的，具有可扩展性和灵活性的优势。
+这三者之间的关系在于它们都是计算机体系结构，提供不同的指令集和设计理念。它们分别在不同的应用场景中使用，比如x86主要用于桌面计算，MIPS常用于嵌入式系统，而RISC-V则是为了适应现代计算需求的开放架构。
+```
+### linux入门教程
+#### 命令行
+##### 总览
+```
+ls:list
+pwd:print working directory
+cd:change directory
+touch:create a file
+cp:copy a file
+mv:move a file
+rm:remove a file
+mkdir:create a directory
+```
+##### manual
+```
+man:manual
+    - 按键	说明
+            Space	空格键，向下翻一页
+            Page Down	向下翻一页
+            Page Up	向上翻一页
+            Home	跳转到首页
+            End	跳转到尾页
+            /	从上到下搜索某个关键字，例如 /help
+            ?	从下到上搜索某个关键字，例如 ?help
+            n	定位到下一个搜索到的关键字
+            N	定位到上一个搜索到的关键字
+            q	退出帮助文档
+    - man ls
+    - man 配置文件路径
+    - man 3 freopen 
+        --因为 man 是按照手册的章节号顺序进行搜索的，因此可以在 man 命令的后面加上一个数字表示查看的具体的范围，各数字的说明如下：
+
+            1：表示用户在 shell 环境可操作的命令或执行文件。
+            2：表示是系统内核可调用的函数与工具。
+            3：一些常用的函数和函数库，大部分为 C 的函数库。
+            4：设备文件说明，通常是 /dev 下的文件。
+            5：配置文件或某些文件格式。如 etc/passwd 等。
+            6：游戏。
+            7：混杂的宏、包等。
+            8：系统管理相关的命令。
+            9：跟内核相关。 
+    -
+    你阅读这个例子的解释: 搜索和printf相关的manual page. 你还是不太明白这是什么意思, 于是你退出man, 在命令行中输入
+    man -k printf
+    并运行, 发现输出了很多和printf相关的命令或库函数, 括号里面的数字代表相应的条目属于manual的哪一个大类. 例如printf (1)是一个shell命令, 而printf (3)是一个库函数. 要访问库函数printf的manual page, 你需要在命令行中输入
+    man 3 printf
+    当你想做一件事的而不知道用什么命令的时候, man的-k参数可以用来列出候选的命令, 然后再通过查看这些命令的manual page来学习怎么使用它们.
+```
+##### 统计代码行数
+```
+find . | grep '\.c$\|\.h$' | xargs wc -l
+```
+###### 正则表达式
+< 正規表示法就是處理字串的方法。
+< 但是系統的資料量太大了，要身為系統管理員的你每天去看這麼多的訊息資料， 從千百行的資料裡面找出一行有問題的訊息，呵呵～光是用肉眼去看，想不瘋掉都很難！ 這個時候，我們就可以透過『正規表示法』的功能，將這些登錄的資訊進行處理， 僅取出『有問題』的資訊來進行分析，哈哈！如此一來，你的系統管理工作將會 『快樂得不得了』啊！當然，正規表示法的優點還不止於此，等你有一定程度的瞭解之後，你會愛上他喔！
+(哈哈哈哈这段好可爱)
+记录一下一个很好的网站 ([鸟站](https://linux.vbird.org/linux_basic/centos7/0320bash.php#grep))
+bash vim shell等知识都有（计算机系统概论，上学期学的aaa居然没发现这个网站）
+例子：grep
+```bash
+[dmtsai@study ~]$ grep [-acinv] [--color=auto] '搜寻字串' filename
+选项与参数：
+-a ：将binary 档案以text 档案的方式搜寻资料
+-c ：计算找到'搜寻字串' 的次数
+-i ：忽略大小写的不同，所以大小写视为相同
+-n ：顺便输出行号
+-v ：反向选择，亦即显示出没有'搜寻字串' 内容的那一行！
+--color=auto ：可以将找到的关键字部分加上颜色的显示喔！
+
+范例一：将last 当中，有出现root 的那一行就取出来； 
+[dmtsai@study ~]$ last | grep 'root'
+
+范例二：与范例一相反，只要没有root 的就取出！ 
+[dmtsai@study ~]$ last | grep -v 'root'
+
+范例三：在last 的输出讯息中，只要有root 就取出，并且仅取第一栏
+[dmtsai@study ~]$ last | grep 'root' |cut -d ' ' -f1 
+# 在取出root 之后，利用上个指令cut 的处理，就能够仅取得第一栏啰！
+
+范例四：取出/etc/man_db.conf 内含MANPATH 的那几行
+[dmtsai@study ~]$ grep --color=auto 'MANPATH' /etc/man_db.conf 
+....(前面省略).... 
+MANPATH _MAP /usr/games /usr/share/man
+ MANPATH _MAP /opt/bin /opt/man
+ MANPATH _MAP /opt/sbin /opt/man
+ # 神奇的是，如果加上--color=auto 的选项，找到的关键字部分会用特殊颜色显示喔！
+```
+##### 统计磁盘使用情况
+``` bash 
+du -sc /usr/share/* | sort -nr
+```
+```
+du是磁盘空间分析工具, du -sc将目录的大小顺次输出到标准输出, 继而通过管道传送给sort. sort是数据排序工具, 其中的选项-n表示按照数值进行排序, 而-r则表示从大到小输出. sort可以将这些参数连写在一起.
+```
+```bash
+du -sc /usr/share/* | sort -nr | more
+```
+```
+more工具使用空格翻页, 并可以用q键在中途退出. less工具则更为强大, 不仅可以向下翻页, 还可以向上翻页, 同样使用q键退出.
+```
+< To help remember the difference between less and more, a common joke is to say, "less > more," implying that less has greater functionality than more. A similar saying is that "less is more, more or less".
+##### 在Linux下编写Hello World程序
+这部分学过了 懒得写了
+
+##### unix哲学
+- 每个程序只做一件事, 但做到极致
+- 用程序之间的相互协作来解决复杂问题
+- 每个程序都采用文本作为输入和输出, 这会使程序更易于使用
+GNU名字来源很有趣：
+GNU是一个自由操作系统，其软件内容完全采用GPL（通用公共许可证）发布。GNU项目的主要目标是开发一个类Unix的操作系统。GNU这个名字是一个递归缩写，表示“GNU's Not Unix!”。GNU项目的开发始于1984年，包括多个应用程序、系统库、开发工具等。
+简单来说，GNU是一个自由软件运动的核心组成部分，它与Linux内核结合使用，形成了广泛使用的GNU/Linux操作系统。
+### The Missing Semester of Your CS Education
+今晚累了，先写到这里。
+之前就听说这个课程的大名了。
+明天研究吧。
+([课程链接](https://missing.csail.mit.edu/))
+

@@ -8,26 +8,38 @@ const { path } = Astro.props;
 
 <script>
   // @ts-ignore
-  import { init } from "https://unpkg.com/@waline/client@v2/dist/waline.mjs";
-  import "https://unpkg.com/@waline/client@v2/dist/waline.css";
+  import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
+  import "https://unpkg.com/@waline/client@v3/dist/waline.css";
 
   init({
     el: "#waline",
-    serverURL: "https://waline-two-gold.vercel.app", // 替换为您的 Waline 服务端地址
+    serverURL: "https://waline-two-gold.vercel.app",
     path: window.location.pathname,
     lang: "zh-CN",
-    dark: "html.dark", // 适配暗黑模式
+    dark: "html.dark",
     emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo"],
-    // 添加一些额外的样式配置
     meta: ["nick", "mail", "link"],
     requiredMeta: ["nick"],
     reaction: true,
+    // 自定义样式
+    style: {
+      boxShadow: "none",
+      borderRadius: "var(--rounded-box, 1rem)",
+    },
   });
 </script>
 
 <style>
-  /* 可以添加一些自定义样式来匹配您的设计系统 */
+  /* 适配网站主题的样式 */
   :global(.wl-panel) {
     border-radius: var(--rounded-box, 1rem);
+  }
+
+  :global(.wl-btn) {
+    border-radius: var(--rounded-btn, 0.5rem);
+  }
+
+  :global(.wl-header) {
+    border-bottom: 1px solid var(--border-color);
   }
 </style>

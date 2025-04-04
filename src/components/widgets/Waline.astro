@@ -1,30 +1,32 @@
 ---
 const { path } = Astro.props;
-
-// 您可以将此URL添加到consts.ts中
-const SERVER_URL = "https://waline-two-gold.vercel.app";
+import { WALINE_SERVER_URL } from "@config"; // 建议添加到配置文件中
 ---
 
 <div class="card bg-base-100 shadow-md border border-base-200 p-4">
   <div id="waline-comment-system"></div>
 </div>
 
-<script>
+<script define:vars={{ path, serverURL: WALINE_SERVER_URL }}>
   // @ts-ignore
   import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
   import "https://unpkg.com/@waline/client@v3/dist/waline.css";
 
-  init({
-    el: "#waline-comment-system",
-    serverURL: "https://waline-two-gold.vercel.app",
-    path: window.location.pathname,
-    lang: "zh-CN",
-    dark: 'html[data-theme="dracula"]', // 适配您的暗色主题
-    emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo", "//unpkg.com/@waline/emojis@1.1.0/bilibili"],
-    meta: ["nick", "mail", "link"],
-    requiredMeta: ["nick"],
-    reaction: true, // 使用默认的反应按钮
-  });
+  try {
+    init({
+      el: "#waline-comment-system",
+      serverURL,
+      path, // 使用传入的path参数
+      lang: "zh-CN",
+      dark: 'html[data-theme="dracula"]', // 适配您的暗色主题
+      emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo", "//unpkg.com/@waline/emojis@1.1.0/bilibili"],
+      meta: ["nick", "mail", "link"],
+      requiredMeta: ["nick"],
+      reaction: true, // 使用默认的反应按钮
+    });
+  } catch (error) {
+    console.error("Failed to initialize Waline:", error);
+  }
 </script>
 
 <style>

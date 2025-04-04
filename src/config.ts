@@ -53,3 +53,5 @@ export function t(key: string): string {
 
   return typeof currentObj === "string" ? currentObj : key;
 }
+
+export const WALINE_SERVER_URL = "https://waline-two-gold.vercel.app";

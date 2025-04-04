@@ -1,0 +1,33 @@
+---
+const { path } = Astro.props;
+---
+
+<div class="card bg-base-100 shadow-md border border-base-200 p-4">
+  <div id="waline"></div>
+</div>
+
+<script>
+  // @ts-ignore
+  import { init } from "https://unpkg.com/@waline/client@v2/dist/waline.mjs";
+  import "https://unpkg.com/@waline/client@v2/dist/waline.css";
+
+  init({
+    el: "#waline",
+    serverURL: "https://waline-two-gold.vercel.app", // 替换为您的 Waline 服务端地址
+    path: window.location.pathname,
+    lang: "zh-CN",
+    dark: "html.dark", // 适配暗黑模式
+    emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo"],
+    // 添加一些额外的样式配置
+    meta: ["nick", "mail", "link"],
+    requiredMeta: ["nick"],
+    reaction: true,
+  });
+</script>
+
+<style>
+  /* 可以添加一些自定义样式来匹配您的设计系统 */
+  :global(.wl-panel) {
+    border-radius: var(--rounded-box, 1rem);
+  }
+</style>

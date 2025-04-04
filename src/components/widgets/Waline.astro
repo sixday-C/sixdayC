@@ -1,9 +1,12 @@
 ---
 const { path } = Astro.props;
+
+// 您可以将此URL添加到consts.ts中
+const SERVER_URL = "https://waline-two-gold.vercel.app";
 ---
 
 <div class="card bg-base-100 shadow-md border border-base-200 p-4">
-  <div id="waline"></div>
+  <div id="waline-comment-system"></div>
 </div>
 
 <script>
@@ -12,20 +15,15 @@ const { path } = Astro.props;
   import "https://unpkg.com/@waline/client@v3/dist/waline.css";
 
   init({
-    el: "#waline",
+    el: "#waline-comment-system",
     serverURL: "https://waline-two-gold.vercel.app",
     path: window.location.pathname,
     lang: "zh-CN",
-    dark: "html.dark",
-    emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo"],
+    dark: 'html[data-theme="dracula"]', // 适配您的暗色主题
+    emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo", "//unpkg.com/@waline/emojis@1.1.0/bilibili"],
     meta: ["nick", "mail", "link"],
     requiredMeta: ["nick"],
-    reaction: true,
-    // 自定义样式
-    style: {
-      boxShadow: "none",
-      borderRadius: "var(--rounded-box, 1rem)",
-    },
+    reaction: true, // 使用默认的反应按钮
   });
 </script>
 

@@ -4,11 +4,13 @@ import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import FeatureCard from "@/components/mdx/FeatureCard.astro";
 import GitHubStats from "@/components/mdx/GitHubStats.astro";
+import Card from "@/components/temple/Card.astro";
+import LinkCard from "@/components/mdx/LinkCard.astro";
 ---
 
 <BaseLayout title="Home">
   <MainCard
-    title="Hi, I'm sixdayC!欢迎来到我的小站🎇"
+    title="Hi, I'm sixdayC!"
     description="carpe diem, seize the day!"
     textOverlay="HOME"
     infoIcon="lucide:info"
@@ -17,13 +19,25 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
       <h1
         class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
       >
-        🌟 你好鸭(≧▽≦)
+        🌟 你好鸭(≧▽≦) 欢迎来到我的小站🎇
       </h1>
-      <p class="text-xl text-base-content/80 max-w-3xl mb-8">
-        我时常觉得自己很健忘：忘记了一些人和事，忘记了自己从哪里来、又要到哪里去。
-        所以我给我自己写了一个博客、一个`不受控制`的博客、一个`只属于我`的博客，
-        让我可以写点东西、记点东西，不至于把过去忘得一干二净。 --SunMaple
-      </p>
     </div>
   </MainCard>
+  <!-- 使用 Card.astro 组件 -->
+  <Card class="p-6 mt-8 bg-base-200 shadow-md">
+    <div class="flex flex-col items-center text-center">
+      <Icon name="lucide:quote" class="w-10 h-10 text-primary mb-4" />
+      <blockquote class="text-lg text-base-content/80 max-w-3xl mb-4">
+        <p>
+          我时常觉得自己很健忘：忘记了一些人和事，忘记了自己从哪里来、又要到哪里去。
+        </p>
+        <p>
+          所以我给我自己写了一个博客、一个<em>“不受控制”</em>的博客、一个<em
+            >“只属于我”</em
+          >的博客， 让我可以写点东西、记点东西，不至于把过去忘得一干二净。
+        </p>
+        <footer class="mt-4 text-right">—— SunMaple</footer>
+      </blockquote>
+    </div>
+  </Card>
 </BaseLayout>

@@ -3,8 +3,8 @@
 const { path } = Astro.props;
 ---
 
-<!-- Waline 挂载点 -->
-<div id="waline"></div>
+<!-- Waline 挂载点，使用 data-path 传递路径 -->
+<div id="waline" data-path={path}></div>
 
 <!-- 引入 Waline 样式 -->
 <link
@@ -16,12 +16,14 @@ const { path } = Astro.props;
 <script type="module">
   import { init } from "https://unpkg.com/@waline/client@v2/dist/waline.mjs";
 
-  // 初始化 Waline
+  const el = document.getElementById("waline");
+  const path = el?.dataset.path || window.location.pathname;
+
   init({
-    el: "#waline", // 挂载到的 DOM 元素
+    el: "#waline",
     serverURL: "https://www.sixdayc.xyz", // 替换为你的 Waline 服务器地址
-    path: "{path}", // 动态路径
-    lang: "zh-CN", // 设置语言为中文
-    dark: 'html[data-theme="dark"]', // 支持深色模式（可选）
+    path: path,
+    lang: "zh-CN",
+    dark: 'html[data-theme="dark"]',
   });
 </script>

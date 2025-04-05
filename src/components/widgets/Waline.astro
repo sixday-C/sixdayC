@@ -1,45 +1,27 @@
 ---
+// Waline.astro
 const { path } = Astro.props;
-import { WALINE_SERVER_URL } from "@config"; // 建议添加到配置文件中
 ---
 
-<div class="card bg-base-100 shadow-md border border-base-200 p-4">
-  <div id="waline-comment-system"></div>
-</div>
+<!-- Waline 挂载点 -->
+<div id="waline"></div>
 
-<script define:vars={{ path, serverURL: WALINE_SERVER_URL }}>
-  // @ts-ignore
-  import { init } from "https://unpkg.com/@waline/client@v3/dist/waline.js";
-  import "https://unpkg.com/@waline/client@v3/dist/waline.css";
+<!-- 引入 Waline 样式 -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+/>
 
-  try {
-    init({
-      el: "#waline-comment-system",
-      serverURL,
-      path, // 使用传入的path参数
-      lang: "zh-CN",
-      dark: 'html[data-theme="dracula"]', // 适配您的暗色主题
-      emoji: ["//unpkg.com/@waline/emojis@1.1.0/weibo", "//unpkg.com/@waline/emojis@1.1.0/bilibili"],
-      meta: ["nick", "mail", "link"],
-      requiredMeta: ["nick"],
-      reaction: true, // 使用默认的反应按钮
-    });
-  } catch (error) {
-    console.error("Failed to initialize Waline:", error);
-  }
+<!-- 初始化 Waline -->
+<script type="module">
+  import { init } from "https://unpkg.com/@waline/client@v2/dist/waline.mjs";
+
+  // 初始化 Waline
+  init({
+    el: "#waline", // 挂载到的 DOM 元素
+    serverURL: "https://www.sixdayc.xyz", // 替换为你的 Waline 服务器地址
+    path: "{path}", // 动态路径
+    lang: "zh-CN", // 设置语言为中文
+    dark: 'html[data-theme="dark"]', // 支持深色模式（可选）
+  });
 </script>
-
-<style>
-  /* 适配网站主题的样式 */
-  :global(.wl-panel) {
-    border-radius: var(--rounded-box, 1rem);
-  }
-
-  :global(.wl-btn) {
-    border-radius: var(--rounded-btn, 0.5rem);
-  }
-
-  :global(.wl-header) {
-    border-bottom: 1px solid var(--border-color);
-  }
-</style>

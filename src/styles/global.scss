@@ -655,3 +655,54 @@ kbd {
     @apply block text-center py-8 text-base-content opacity-50;
   }
 }
+/* 🌙 Waline 暗色风格适配 + 玻璃拟态风格补丁 */
+
+.waline-wrapper {
+  @apply bg-base-100/50 backdrop-blur-md rounded-2xl p-4 shadow-lg;
+  color: var(--tw-prose-body);
+  /* 文字跟随主题 */
+}
+
+/* 评论头部文字（欢迎评论那部分） */
+.waline-wrapper .waline-header {
+  @apply w-full max-w-full px-2 text-base text-base-content/70;
+}
+
+/* 输入框：昵称、邮箱、网址、评论内容 */
+.waline-wrapper input,
+.waline-wrapper textarea {
+  @apply bg-base-100/30 text-base-content border border-base-300/40 rounded-xl px-3 py-2 transition-all;
+  backdrop-filter: blur(4px);
+}
+
+/* 输入框焦点样式 */
+.waline-wrapper input:focus,
+.waline-wrapper textarea:focus {
+  @apply outline-none ring-2 ring-primary/40;
+}
+
+/* 按钮优化：登录 / 提交 */
+.waline-wrapper .wl-btn {
+  @apply rounded-xl px-4 py-1.5 text-sm font-semibold shadow bg-primary text-primary-content transition-all hover:brightness-110;
+}
+
+/* 表情 GIF 粘贴栏美化 */
+.waline-wrapper .wl-editor-footer .wl-action {
+  @apply text-base-content/60 hover:text-primary transition;
+}
+
+/* 评论卡片优化 */
+.waline-wrapper .waline-comment {
+  @apply bg-base-100/20 backdrop-blur-md rounded-xl px-4 py-3 shadow-inner;
+}
+
+/* 评论用户信息标签优化 */
+.waline-wrapper .wl-nick,
+.waline-wrapper .wl-tag {
+  @apply font-medium text-base-content/90;
+}
+
+/* 评论时间、浏览器信息等 */
+.waline-wrapper .waline-meta {
+  @apply text-xs text-base-content/50;
+}

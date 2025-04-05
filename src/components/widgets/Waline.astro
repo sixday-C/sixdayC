@@ -1,12 +1,13 @@
 ---
-// Waline.astro
 const { path } = Astro.props;
 ---
 
 <!-- Waline 挂载点，使用 data-path 传递路径 -->
-<div id="waline" data-path={path}></div>
+<div class="waline-wrapper">
+  <div id="waline" data-path={path}></div>
+</div>
 
-<!-- 引入 Waline 样式 -->
+<!-- Waline 样式 -->
 <link
   rel="stylesheet"
   href="https://unpkg.com/@waline/client@v2/dist/waline.css"
@@ -21,7 +22,7 @@ const { path } = Astro.props;
 
   init({
     el: "#waline",
-    serverURL: "https://www.sixdayc.xyz", // 替换为你的 Waline 服务器地址
+    serverURL: "https://www.sixdayc.xyz",
     path: path,
     lang: "zh-CN",
     dark: 'html[data-theme="dark"]',

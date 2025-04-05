@@ -19,14 +19,18 @@ import LinkCard from "@/components/mdx/LinkCard.astro";
       <h1
         class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
       >
-        🌟 你好鸭(≧▽≦) 欢迎来到我的小站🎇
+        🌟 你好鸭(≧▽≦)！ 
+      </h1>
+      <h1
+        class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+      >
+        我是sixdayC，欢迎来到我的小站！
       </h1>
     </div>
   </MainCard>
   <!-- 使用 Card.astro 组件 -->
   <Card class="p-6 mt-8 bg-base-200 shadow-md">
     <div class="flex flex-col items-center text-center">
-      <Icon name="lucide:quote" class="w-10 h-10 text-primary mb-4" />
       <blockquote class="text-lg text-base-content/80 max-w-3xl mb-4">
         <p>
           我时常觉得自己很健忘：忘记了一些人和事，忘记了自己从哪里来、又要到哪里去。
@@ -38,6 +42,10 @@ import LinkCard from "@/components/mdx/LinkCard.astro";
         </p>
         <footer class="mt-4 text-right">—— SunMaple</footer>
       </blockquote>
+      <div class="flex justify-center space-x-4 mt-6">
+        <LinkCard href="https://www.sixdayc.top/blog" title="我的博客" desc="查看我的博客文章" icon="lucide:book" />
+        <LinkCard href="https://www.sixdayc.top/about" title="关于我" desc="了解更多关于我" icon="lucide:user" />
+      </div>
     </div>
   </Card>
 </BaseLayout>

@@ -3,6 +3,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import MainCard from "@/components/MainCard.astro";
 import GitHubStats from "@/components/mdx/GitHubStats.astro";
+import Card from "@/components/temple/Card.astro";
+import LinkCard from "@/components/mdx/LinkCard.astro";
 ---
 
 <BaseLayout title="About">
@@ -12,6 +14,13 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
     textOverlay="ABOUT"
     infoIcon="lucide:user"
   >
+    <div>
+      <Icon name="lucide:quote" class="w-10 h-10 text-primary mb-4" />
+      <blockquote class="text-lg text-base-content/80 max-w-3xl mb-4">
+        <p>意识到会不说再见地离别，才学会珍惜生命的每一天。</p>
+        <footer class="mt-4 text-right">—— SunMaple</footer>
+      </blockquote>
+    </div>
     <div class="space-y-10 mb-8">
       <!-- Profile Section -->
       <section
@@ -72,9 +81,14 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
             {
               [
                 {
+                  date: "April 2025",
+                  title: "MY BLOG",
+                  desc: "创建了我的小站，用来珍惜生命的每一天",
+                },
+                {
                   date: "March 2025",
                   title: "第一个完整的团队游戏",
-                  desc: "前前后后两个星期，使用unity引擎，和806-GD的小伙伴们一起开发了2d解密游戏《神州物理录》，用于计算机设计比赛数媒赛道",
+                  desc: "806-GD的小伙伴们一起开发了《神州物理录》",
                 },
               ].map((item, i) => (
                 <div class="relative flex gap-4 pb-2 md:pb-0 md:min-w-[250px]">
@@ -97,6 +111,16 @@ import GitHubStats from "@/components/mdx/GitHubStats.astro";
           </div>
         </div>
       </section>
+      <Card class="p-6 mt-8 bg-base-200 shadow-md">
+        <div class="flex flex-col items-center text-center">
+          <LinkCard
+            title="我的博客"
+            desc="查看我的博客文章"
+            url="https://www.sixdayc.top/blog"
+            icon="lucide:book"
+          />
+        </div>
+      </Card>
     </div>
   </MainCard>
 </BaseLayout>

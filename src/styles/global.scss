@@ -659,7 +659,7 @@ kbd {
 
 .waline-wrapper {
   @apply bg-base-100/50 backdrop-blur-md rounded-2xl p-4 shadow-lg;
-  color: var(--tw-prose-body);
+  color: black; // 修改: 将文字颜色改为黑色
   /* 文字跟随主题 */
 }
 
@@ -669,10 +669,12 @@ kbd {
 }
 
 /* 输入框：昵称、邮箱、网址、评论内容 */
+/* 输入框：昵称、邮箱、网址、评论内容 */
 .waline-wrapper input,
 .waline-wrapper textarea {
   @apply bg-base-100/30 text-base-content border border-base-300/40 rounded-xl px-3 py-2 transition-all;
   backdrop-filter: blur(4px);
+  color: black !important; // 强制文字颜色为黑色
 }
 
 /* 输入框焦点样式 */

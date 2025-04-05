@@ -48,11 +48,6 @@ site:
       href: /friend
       svg: "material-symbols:supervisor-account-outline-rounded"
       target: _self
-    - id: board
-      text: Message Board
-      href: /board
-      svg: "material-symbols:message-rounded"
-      target: _self
     - id: contact
       text: Contact
       href: "mailto:sixdayc@gmail.com"

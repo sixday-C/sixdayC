@@ -1,0 +1,134 @@
+---
+title: "洛谷P1065 模拟题"
+description: "车间调度问题 离散模拟题"
+pubDate: 05 06 2025
+image: /image/drama/1.jpg
+categories:
+  - tech
+tag:
+    -algorithm
+draft: true
+---
+# 题目来源
+
+([链接]https://www.luogu.com.cn/problem/P1065)
+
+# 其他问题
+
+一个物体多个信息，可用struct存储
+
+```cpp
+
+struct Information {
+    int id;    // 在第 id 台机器上加工
+    int cost;  // 花费 cost 时间
+};
+
+```
+
+
+需要输入输出(只用cin/cout,不能混用scanf/printf)大量数据的时候肿么办：
+
+加上这两行代码
+```cpp
+ios::sync_with_stdio(false);//关闭 cin / cout 与 scanf / printf 的同步 ，防止拖慢速度
+cin.tie(nullptr);//解除 cin 与 cout 的绑定，防止每次 cin 时都自动刷新 cout
+```
+
+解答代码
+
+```cpp
+#include <iostream>
+using namespace std;
+
+struct Information {
+    int id;    // 在第 id 台机器上加工
+    int cost;  // 花费 cost 时间
+};
+
+int m, n;
+// 调度顺序
+int listOrder[501];
+// 存放每个工件每道工序的（机器号, 加工时间）
+Information a[21][21];
+// mac[机器编号][时间]：false 表示空闲，true 表示占用
+bool mac[21][100001];
+// stepIdx[j]：工件 j 已经执行到第几步（工序索引）
+int stepIdx[21];
+// las_time[j]：工件 j 上一次完成时间
+int las_time[21];
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cin >> m >> n;
+    for (int i = 1; i <= m * n; ++i) {
+        cin >> listOrder[i];
+    }
+
+    // 读入机器号
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            cin >> a[i][j].id;
+        }
+    }
+    // 读入加工时间
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            cin >> a[i][j].cost;
+        }
+    }
+
+    // 手动初始化——去掉 memset
+    // 初始化 mac 数组为 false（空闲）
+    for (int machine = 1; machine <= m; ++machine) {
+        for (int t = 0; t < 100001; ++t) {
+            mac[machine][t] = false;
+        }
+    }
+    // 初始化步数和上次完成时间
+    for (int job = 1; job <= n; ++job) {
+        stepIdx[job] = 0;
+        las_time[job] = 0;
+    }
+
+    int ans = 0;
+
+    // 按给定顺序依次调度每道工序
+    for (int idx = 1; idx <= m * n; ++idx) {
+        int job = listOrder[idx];
+        // 这次调度它的第 stepIdx[job]+1 道工序
+        ++stepIdx[job];
+
+        int machine = a[job][stepIdx[job]].id;
+        int cost    = a[job][stepIdx[job]].cost;
+
+        // s 用来统计当前连续空闲的时间长度
+        int s = 0;
+        // 从该工件上次完成时间的下一刻开始，往后找连续 cost 个空闲刻度
+        for (int t = las_time[job] + 1; ; ++t) {
+            if (!mac[machine][t]) {
+                ++s;
+            } else {
+                s = 0;
+            }
+            // 找到足够长的空闲区间
+            if (s == cost) {
+                // 将这段区间标记为占用
+                for (int k = t - cost + 1; k <= t; ++k) {
+                    mac[machine][k] = true;
+                }
+                // 更新全局完成时间
+                if (t > ans) ans = t;
+                // 更新该工件的最后完成时间
+                las_time[job] = t;
+                break;
+            }
+        }
+    }
+
+    cout << ans << "\n";
+    return 0;
+}
+```

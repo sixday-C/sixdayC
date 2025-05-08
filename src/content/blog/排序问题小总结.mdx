@@ -1,0 +1,76 @@
+---
+title: 排序问题总结
+description: 从 P1781 到 P1059，掌握排序中的比较逻辑与易错细节  
+pubDate: 2025-05-08  
+image: /image/image2.jpg  
+categories:  
+  - algorithm  
+tags:  
+  - 算法
+  - 排序  
+  - 字符串比较  
+  - 初学者笔记  
+---
+
+import Warning from "../../components/mdx/Warning.astro";
+import Success from "../../components/mdx/Success.astro";
+import Info from "../../components/mdx/Info.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+<LinkCard  
+title="P1781 宇宙总统"  
+desc="洛谷题目：比较编号字符串，选出最大者"  
+url="https://www.luogu.com.cn/problem/P1781"  
+img="/image/image2.jpg"  
+/>
+
+## 💡 最终 AC 代码（P1781）
+
+```cpp
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+struct person{
+    int id;
+    string num;
+};
+
+bool cmp (const person& a,const person& b){
+    if(a.num.size()!=b.num.size()){
+        return a.num.size()>b.num.size();
+    }
+    return a.num>b.num;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    vector<person> a(n);
+    for(int i=0;i<n;i++){
+        cin>>a[i].num;
+        a[i].id=i+1;
+    }
+    sort(a.begin(),a.end(),cmp);
+    cout<<a[0].id<<endl<<a[0].num;
+    return 0;
+}
+
+<Info title="踩坑总结：代码小错误">
+1. 忘记给结构体结尾加分号 `};`  
+2. `cin<<a[i].num;` 写反了输入输出方向，应该是 `cin >>`  
+3. 排序函数传参写成 `cmp()`，应为 `cmp`（函数指针）  
+4. 手动写字符串逐位比较，其实可以直接用 `a.num > b.num`  
+</Info>
+
+<Success title="改进建议">
+- 利用字符串的默认比较（按字典序 = ASCII）可大幅简化代码；
+- 比较前可以判断字符串长度，避免前导零干扰；
+- 如果涉及更复杂的排序逻辑，建议封装成函数提高可读性；
+</Success>
+
+<Warning title="易错点提醒">
+字符串默认是按字符的 ASCII 值逐位比较的，容易因为前导零或写法不规范出错。
+</Warning>

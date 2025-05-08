@@ -10,6 +10,7 @@ tags:
   - 排序  
   - 字符串比较  
   - 初学者笔记  
+draft: true
 ---
 
 import Warning from "../../components/mdx/Warning.astro";
@@ -59,19 +60,23 @@ int main(){
 }
 ```
 
+---
 <Info title="踩坑总结：代码小错误">
 1. 忘记给结构体结尾加分号 `};`  
+
 2. `cin<<a[i].num;` 写反了输入输出方向，应该是 `cin >>`  
 3. 排序函数传参写成 `cmp()`，应为 `cmp`（函数指针）  
 4. 手动写字符串逐位比较，其实可以直接用 `a.num > b.num`  
 </Info>
 
+---
 <Success title="改进建议">
 - 利用字符串的默认比较（按字典序 = ASCII）可大幅简化代码；
 - 比较前可以判断字符串长度，避免前导零干扰；
 - 如果涉及更复杂的排序逻辑，建议封装成函数提高可读性；
 </Success>
 
+---
 <Warning title="易错点提醒">
 字符串默认是按字符的 ASCII 值逐位比较的，容易因为前导零或写法不规范出错。
 </Warning>

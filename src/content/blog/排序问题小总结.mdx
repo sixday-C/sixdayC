@@ -80,3 +80,82 @@ int main(){
 <Warning title="易错点提醒">
 字符串默认是按字符的 ASCII 值逐位比较的，容易因为前导零或写法不规范出错。
 </Warning>
+
+---
+---
+
+## 题目：P1908 逆序对（归并排序）
+
+<LinkCard  
+title="P1908 逆序对（洛谷）"  
+desc="用归并排序统计逆序对，典型分治应用，效率 O(nlogn)"  
+url="https://www.luogu.com.cn/problem/P1908"  
+img="/image/image2.jpg"  
+/>
+
+```cpp
+#include<iostream>
+#include<vector>
+using namespace std;
+
+static long long t = 0;
+
+void mergeSort(vector<int>& a, vector<int>& b, int l, int r) {
+    if (l >= r) return;
+    int mid = (l + r) / 2;
+    mergeSort(a, b, l, mid);
+    mergeSort(a, b, mid + 1, r);
+    int i = l, j = mid + 1, k = l;
+    while (i <= mid && j <= r) {
+        if (a[i] <= a[j]) b[k++] = a[i++];
+        else {
+            b[k++] = a[j++];
+            t += (mid - i + 1); // 💡统计逆序对
+        }
+    }
+    while (i <= mid) b[k++] = a[i++];
+    while (j <= r) b[k++] = a[j++];
+    for (int p = l; p <= r; p++) a[p] = b[p];
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> a(n), b(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    mergeSort(a, b, 0, n - 1);
+    cout << t;
+    return 0;
+}
+
+```
+---
+<Info title="用了什么思路？">
+使用归并排序分治数组，并在“合并两个有序段”时统计逆序对数量。每次出现 `a[i] > a[j]`，即可一次统计 `[i...mid]` 所有元素都构成逆序对，贡献为 `mid - i + 1`。
+</Info>
+
+<Success title="有没有更优解法？">
+O(nlogn) 是统计逆序对的最优解法。也可以使用树状数组（BIT）或归并写法的优化结构，但复杂度相同。
+</Success>
+
+<Warning title="有没有犯错？">
+最开始错误写成 `t++`，只加了 1，导致统计不完整。归并排序里要一次性加 `mid - i + 1` 才能正确统计所有逆序对！
+</Warning>
+
+---
+
+<LinkCard  
+title="归并排序动画讲解（B站秒懂神作）"  
+desc="递归与非递归过程、效率分析、稳定性可视化讲解，超级直观！"  
+url="https://www.bilibili.com/video/BV1em1oYTEFf/"  
+img="/image/image2.jpg"  
+/>
+
+---
+
+<LinkCard  
+title="up主：蓝不过海呀"  
+desc="太优秀了啊啊啊啊这个动画做的"  
+url="https://space.bilibili.com/401399175"  
+img="/image/image2.jpg"  
+/>

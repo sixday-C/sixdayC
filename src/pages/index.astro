@@ -30,32 +30,34 @@ import LinkCard from "@/components/mdx/LinkCard.astro";
   </MainCard>
   <!-- 使用 Card.astro 组件 -->
   <Card class="p-6 mt-8 bg-base-200 shadow-md">
-    <div class="flex flex-col items-center text-center">
-      <blockquote class="text-lg text-base-content/80 max-w-3xl mb-4">
-        <p>
-          我时常觉得自己很健忘：忘记了一些人和事，忘记了自己从哪里来、又要到哪里去。
-        </p>
-        <p>
-          所以我给我自己写了一个博客、一个<em>『不受控制』</em>的博客、一个<em
-            >『只属于我』</em
-          >的博客， 让我可以写点东西、记点东西，不至于把过去忘得一干二净。
-        </p>
-        <footer class="mt-4 text-right">—— SunMaple</footer>
-      </blockquote>
-      <div class="flex flex-row gap-4 mt-4 justify-center">
-        <LinkCard
-          title="我的博客"
-          desc="查看我的博客文章"
-          url="https://www.sixdayc.top/blog"
-          icon="lucide:book"
-        />
-        <LinkCard
-          url="https://www.sixdayc.top/about"
-          title="关于我"
-          desc="了解更多关于我"
-          icon="lucide:user"
-        />
-      </div>
+    <div class="flex flex-row gap-4 mt-4 justify-center">
+      <LinkCard
+        title="我的博客"
+        desc="查看我的博客文章"
+        url="https://www.sixdayc.top/blog"
+        icon="lucide:book"
+      />
+      <LinkCard
+        url="https://www.sixdayc.top/about"
+        title="关于我"
+        desc="了解更多关于我"
+        icon="lucide:user"
+      />
+    </div>
+
+    <div class="flex justify-center mt-4">
+      <LinkCard
+        url="https://www.sixdayc.top/friend"
+        title="友链"
+        desc="查看我的朋友们"
+        icon="lucide:link"
+      />
+      <LinkCard
+        url="https://www.sixdayc.top/guestbook"
+        title="留言板"
+        desc="给我留言吧！"
+        icon="lucide:message-square"
+      />
     </div>
   </Card>
 </BaseLayout>

@@ -2,18 +2,108 @@
 const { path } = Astro.props;
 ---
 
-<!-- Waline 挂载点，使用 data-path 传递路径 -->
-<div class="waline-wrapper">
-  <div id="waline" data-path={path}></div>
+<!-- ✅ 引入 Waline 样式 -->
+<style>
+  @import url("https://unpkg.com/@waline/client@v2/dist/waline.css");
+
+  /* 🌞 明亮主题适配 */
+  html[data-theme="light"] {
+    --waline-bgcolor: #f8fafc;
+    --waline-color: #1f2937;
+    --waline-border: #e5e7eb;
+    --waline-theme-color: #60a5fa;
+    --waline-info-bgcolor: #f1f5f9;
+    --waline-disabled-bgcolor: #cbd5e1;
+  }
+
+  /* 🌙 暗黑主题适配 */
+  html[data-theme="dark"] {
+    --waline-bgcolor: #1e1e2e;
+    --waline-color: #cececd; /* ← 使用正文色 */
+    --waline-border: #334155;
+    --waline-theme-color: #34d399;
+    --waline-info-bgcolor: #2a2a40;
+    --waline-disabled-bgcolor: #3f3f46;
+  }
+
+  /* 🧩 评论输入框美化 */
+  .waline-wrapper .wl-editor textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 6rem !important;
+    max-height: 16rem !important;
+    padding: 0.75rem 1rem !important;
+    box-sizing: border-box !important;
+    resize: vertical !important;
+    overflow: auto !important;
+    border-radius: 0.75rem !important;
+    background-color: var(--waline-bgcolor) !important;
+    border: 1px solid var(--waline-border) !important;
+    color: var(--waline-color) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .waline-wrapper .wl-editor textarea:focus {
+    border-color: var(--waline-theme-color) !important;
+  }
+
+  .waline-wrapper .wl-editor textarea::placeholder {
+    color: var(--waline-color);
+    opacity: 0.4;
+  }
+
+  .waline-wrapper .wl-editor textarea::-webkit-resizer {
+    display: none !important;
+  }
+
+  /* ✨ 评论框整体外观 */
+  .waline-wrapper .wl-panel {
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .waline-wrapper .wl-avatar {
+    border-radius: 9999px !important;
+  }
+
+  .waline-wrapper .wl-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ✅ 暗黑模式下所有文字/图标统一为正文色 #cececd */
+  html[data-theme="dark"] .waline-wrapper .wl-content,
+  html[data-theme="dark"] .waline-wrapper .wl-comment-content,
+  html[data-theme="dark"] .waline-wrapper .wl-nick,
+  html[data-theme="dark"] .waline-wrapper .wl-btn,
+  html[data-theme="dark"] .waline-wrapper .wl-icon {
+    color: #cececd !important;
+  }
+
+  /* 回复区引用的颜色稍淡一些 */
+  html[data-theme="dark"] .waline-wrapper blockquote {
+    color: #bfbfbd !important;
+  }
+
+  /* hover 高亮依然用主色 */
+  html[data-theme="dark"] .waline-wrapper .wl-action .wl-icon:hover {
+    color: var(--waline-theme-color) !important;
+  }
+</style>
+
+<!-- ✅ 评论挂载区 -->
+<div class="waline-wrapper max-w-3xl mx-auto px-4 mt-8">
+  <div
+    id="waline"
+    data-path={path}
+    class="rounded-xl bg-base-100 p-4 sm:p-6 border border-base-300 shadow-md"
+  >
+  </div>
 </div>
 
-<!-- Waline 样式 -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/@waline/client@v2/dist/waline.css"
-/>
-
-<!-- 初始化 Waline -->
+<!-- ✅ Waline 初始化脚本 -->
 <script type="module">
   import { init } from "https://unpkg.com/@waline/client@v2/dist/waline.mjs";
 
@@ -25,6 +115,7 @@ const { path } = Astro.props;
     serverURL: "https://www.sixdayc.xyz",
     path: path,
     lang: "zh-CN",
-    dark: 'html[data-theme="dark"]',
+    dark: "html[data-theme='dark']",
+    emoji: ["https://unpkg.com/@waline/emojis@1.1.0/weibo"],
   });
 </script>

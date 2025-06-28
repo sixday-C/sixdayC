@@ -53,6 +53,11 @@ site:
       href: "mailto:sixdayc@gmail.com"
       target: _blank # 在新标签页打开
       svg: "material-symbols:attach-email-outline-rounded"
+    - id: board
+      text: Board
+      href: /board
+      target: _self
+      svg: "material-symbols:contextual-token-outline-rounded"
 # 用户的个人信息
 user:
   name: SixdayC # 用户名

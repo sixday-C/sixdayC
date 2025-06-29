@@ -39,7 +39,6 @@ const displayDate = blog.data.pubDate
     image={blog.data.image}
     infoIcon="lucide:info"
   >
-    <!-- Article info using PostInfo component -->
     <PostInfo
       pubDate={displayDate}
       badge={blog.data.badge}
@@ -47,12 +46,10 @@ const displayDate = blog.data.pubDate
       time={remarkPluginFrontmatter.readingTime}
     />
 
-    <!-- Categories and tags using PostFilter component -->
     <div class="mb-6">
       <PostFilter categories={blog.data.categories} tags={blog.data.tags} />
     </div>
 
-    <!-- Article Content -->
     <div class="mt-8">
       <div
         id="content"
@@ -71,9 +68,28 @@ const displayDate = blog.data.pubDate
         />
       </div>
     </div>
-    <!-- 添加评论系统 -->
-    <div class="mt-8">
-      <h2>Comment</h2>
+
+    <!-- 评论系统区域，参考 board 页面风格 -->
+    <div class="max-w-3xl mx-auto px-4 mt-12">
+      <h2 class="text-2xl font-bold mb-2">Comment</h2>
+      <div class="text-base text-gray-500 mb-8" style="font-size: 0.95rem;">
+        <span style="font-size:0.92em;">
+          留下QQ邮箱，可以使用QQ头像~<br />
+          或者在
+          <a
+            href="https://gravatar.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline text-blue-500 hover:text-blue-700"
+          >
+            Gravatar
+          </a>
+          设置头像~<br />
+          <span style="font-size:0.9em;color:#888;"
+            >（看不到评论试试刷新一下~）</span
+          >
+        </span>
+      </div>
       <Waline path={`/blog/${blog.slug}`} />
     </div>
   </MainCard>

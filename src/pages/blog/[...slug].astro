@@ -68,31 +68,30 @@ const displayDate = blog.data.pubDate
         />
       </div>
     </div>
-
-    <!-- 评论系统区域，参考 board 页面风格 -->
-    <div class="max-w-3xl mx-auto px-4 mt-12">
-      <h2 class="text-2xl font-bold mb-2">Comment</h2>
-      <div class="text-base text-gray-500 mb-8" style="font-size: 0.95rem;">
-        <span style="font-size:0.92em;">
-          留下QQ邮箱，可以使用QQ头像~<br />
-          或者在
-          <a
-            href="https://gravatar.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline text-blue-500 hover:text-blue-700"
-          >
-            Gravatar
-          </a>
-          设置头像~<br />
-          <span style="font-size:0.9em;color:#888;"
-            >（看不到评论试试刷新一下~）</span
-          >
-        </span>
-      </div>
-      <Waline path={`/blog/${blog.slug}`} />
-    </div>
   </MainCard>
+  <!-- 评论系统区域，参考 board 页面风格 -->
+  <div class="w-full max-w-screen-lg mx-auto px-4 mt-12">
+    <h2 class="text-2xl font-bold mb-2">Comment</h2>
+    <div class="text-base text-gray-500 mb-8" style="font-size: 0.95rem;">
+      <span style="font-size:0.92em;">
+        留下QQ邮箱，可以使用QQ头像~<br />
+        或者在
+        <a
+          href="https://gravatar.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline text-blue-500 hover:text-blue-700"
+        >
+          Gravatar
+        </a>
+        设置头像~<br />
+        <span style="font-size:0.9em;color:#888;"
+          >（看不到评论试试刷新一下~）</span
+        >
+      </span>
+    </div>
+    <Waline path={`/blog/${blog.slug}`} />
+  </div>
 </BaseLayout>
 
 <style is:global>

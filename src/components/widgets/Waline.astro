@@ -19,7 +19,7 @@ const { path } = Astro.props;
   /* 🌙 暗黑主题适配 */
   html[data-theme="dark"] {
     --waline-bgcolor: #1e1e2e;
-    --waline-color: #cececd; /* ← 使用正文色 */
+    --waline-color: #cececd;
     --waline-border: #334155;
     --waline-theme-color: #34d399;
     --waline-info-bgcolor: #2a2a40;
@@ -28,24 +28,20 @@ const { path } = Astro.props;
 
   /* 🧩 评论输入框美化 */
   .waline-wrapper .wl-editor textarea {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 6rem !important;
-    max-height: 16rem !important;
-    padding: 0.75rem 1rem !important;
-    box-sizing: border-box !important;
-    resize: vertical !important;
-    overflow: auto !important;
-    border-radius: 0.75rem !important;
-    background-color: var(--waline-bgcolor) !important;
-    border: 1px solid var(--waline-border) !important;
-    color: var(--waline-color) !important;
-    outline: none !important;
-    box-shadow: none !important;
+    width: 100%;
+    min-height: 6rem;
+    max-height: 16rem;
+    padding: 0.75rem 1rem;
+    resize: vertical;
+    border-radius: 0.75rem;
+    background-color: var(--waline-bgcolor);
+    border: 1px solid var(--waline-border);
+    color: var(--waline-color);
+    box-sizing: border-box;
   }
 
   .waline-wrapper .wl-editor textarea:focus {
-    border-color: var(--waline-theme-color) !important;
+    border-color: var(--waline-theme-color);
   }
 
   .waline-wrapper .wl-editor textarea::placeholder {
@@ -53,19 +49,8 @@ const { path } = Astro.props;
     opacity: 0.4;
   }
 
-  .waline-wrapper .wl-editor textarea::-webkit-resizer {
-    display: none !important;
-  }
-
-  /* ✨ 评论框整体外观 */
-  .waline-wrapper .wl-panel {
-    border-radius: 1rem;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-  }
-
   .waline-wrapper .wl-avatar {
-    border-radius: 9999px !important;
+    border-radius: 9999px;
   }
 
   .waline-wrapper .wl-content {
@@ -73,7 +58,6 @@ const { path } = Astro.props;
     line-height: 1.6;
   }
 
-  /* ✅ 暗黑模式下所有文字/图标统一为正文色 #cececd */
   html[data-theme="dark"] .waline-wrapper .wl-content,
   html[data-theme="dark"] .waline-wrapper .wl-comment-content,
   html[data-theme="dark"] .waline-wrapper .wl-nick,
@@ -82,14 +66,17 @@ const { path } = Astro.props;
     color: #cececd !important;
   }
 
-  /* 回复区引用的颜色稍淡一些 */
   html[data-theme="dark"] .waline-wrapper blockquote {
     color: #bfbfbd !important;
   }
 
-  /* hover 高亮依然用主色 */
   html[data-theme="dark"] .waline-wrapper .wl-action .wl-icon:hover {
-    color: var(--waline-theme-color) !important;
+    color: var(--waline-theme-color);
+  }
+
+  .waline-wrapper .wl-panel {
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
   }
 </style>
 
@@ -112,7 +99,7 @@ const { path } = Astro.props;
 
   init({
     el: "#waline",
-    serverURL: "https://www.sixdayc.xyz",
+    serverURL: "https://www.sixdayc.xyz", // 🧠 ← 替换为你自己的 Waline 后端地址
     path: path,
     lang: "zh-CN",
     dark: "html[data-theme='dark']",

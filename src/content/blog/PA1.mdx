@@ -1,0 +1,46 @@
+---
+title: PA1
+description: PA1学习笔记
+pubDate: 19 7 2025
+image: /image/drama/1.jpg
+categories:
+  - tech
+tags:
+  - PA
+  - system
+draft: true
+---
+
+# ## 开天辟地的篇章
+PA0 [[系统基础环境配置.mdx]]
+👉 [PA1](https://nju-projectn.github.io/ics-pa-gitbook/ics2024/1.2.html)
+记录时间：🍅
+## 一些随便记录的东西
+
+### 状态机
+计算机可以分为两部分，
+时序逻辑部件，
+组合逻辑部件。
+在每个时钟周期到来的时候, 计算机根据当前时序逻辑部件的状态, 在组合逻辑部件的作用下, 计算出并转移到下一时钟周期的新状态.
+0和1两种状态 如果有50个byte，那就有N=2的50次方种状态
+
+### 被逗笑的地方
+![[Pasted image 20250719143612.png]]
+
+![[Pasted image 20250719163659.png]]
+一开始：不就小小PA吗.......
+后来.......：**为什么要用这么变态的PA来折磨自己**
+
+### NEMU
+是什么？**Nanking University EMUlator** 南大的**emulator** 模拟器
+
+### ISA
+是什么？
+Instruction Set Architecture **指令集架构**
+
+### Kconfig 
+保证不同ISA，运行结果正常。
+.config 生成(CONFIG_X86=y)
+conf生成：
+autoconf.h  控制哪些源代码被编译
+auto.conf    控制哪些文件参与编译（控制Makefile的源文件和变量)

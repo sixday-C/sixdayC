@@ -1,0 +1,127 @@
+---
+title: pku-minic compiler 编译学习
+description: pku-minic 学习笔记 
+pubDate: 10 24 2025
+image: /image/drama/1.jpg
+categories:
+  - tech
+tags:
+  - system
+  - compile
+draft: false
+---
+- [ ] 第一次改进项目
+	- [x] 纵览整个项目结构 ✅ 2025-09-28
+		- [ ] 修改.l文件 Q1 错误符号
+		- [ ] .y文件 Q2 头文件
+		- [ ] 研究一下github copilot 更好使用
+
+docker start -ai pku
+
+**autotest -koopa -s lv1 ./**
+**autotest -koopa -s lv1 ./**
+
+root@0816fd8b4ac5:~/compiler# autotest -h      
+
+
+usage: autotest [-h] [-koopa | -riscv | -perf] [-t TEST_CASE_DIR] [-w WORKING_DIR] [-s SUB_DIR] repo_dir
+
+An automated testing script for PKU compiler course.
+
+positional arguments:
+  repo_dir              compiler repository directory
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -koopa                run SysY to Koopa IR test
+  -riscv                run SysY to RISC-V assembly test
+  -perf                 run performance test
+  -t TEST_CASE_DIR, --test_case_dir TEST_CASE_DIR
+                        specify test case directory, default to SCRIPT_DIR/testcases
+  -w WORKING_DIR, --working_dir WORKING_DIR
+                        specify working directory, default to a temporary directory
+  -s SUB_DIR, --sub_dir SUB_DIR
+                        run testcases in the specific sub directory
+                        
+                        
+PKU编译器课程的自动测试脚本。
+
+位置参数：
+
+	Repo_dir编译器存储库目录
+
+可选参数：
+
+	-H，--帮助显示此帮助消息并退出
+
+	-koopa运行SysY到Koopa IR测试
+
+	-riscv运行SysY到RISC-V组装测试
+
+	-性能运行性能测试
+
+-T 测试_案例_DIR，--测试_案例_迪尔 测试_案例_DIR
+
+指定测试用例目录，默认为SCRIPT_DIR/testcases
+
+-W WORKING_DIR，--working_dir WORKING_DIR
+
+指定工作目录，默认为临时目录
+
+-S SUB_DIR，--sub_dir SUB_DIR
+
+在特定子目录中运行测试案例
+
+
+
+./build/compiler -riscv hello.c -o hello.s
+./build/compiler -koopa hello.c -o hello.koopa
+
+此外, 如果只是测试自己的编译器, 你并不需要进入容器的命令行, 你可以直接在宿主机执行:
+
+```
+docker run -it --rm -v 项目目录:/root/compiler maxxing/compiler-dev \
+  autotest 阶段 /root/compiler
+```
+
+MaxXing 在开发这套环境时, 常用的测试方法为:
+
+```bash
+# 先进入 Docker 容器
+docker run -it --rm -v 项目目录:/root/compiler maxxing/compiler-dev bash
+# 在容器中运行 autotest, 但指定工作目录 (-w 选项)
+# 同时, 使用 tee 命令将输出保存到文件
+autotest -w wd compiler 2>&1 | tee compiler/out.txt
+# 测试完毕后, 不要退出容器, 回到宿主机修复 bug
+# 因为编译器目录已经被挂到了容器里, 所以你能在宿主机看到刚刚生成的 out.txt
+# 同时你在宿主机对代码做出的更改也能反映到容器内
+# ...
+# 修改完成后, 回到容器运行同样的 autotest 命令
+# 因为我们指定了工作目录, autotest 会在上次编译的基础上增量编译你的编译器
+# 这样能节省很多时间
+autotest -w wd compiler 2>&1 | tee compiler/out.txt
+
+
+
+
+docker run -it --rm \
+  -v /Users/sixdayc/Projects/PKU/pku-compiler:/root/compiler \
+  maxxing/compiler-dev bash
+  
+  
+  cd /root
+autotest -w wd compiler 2>&1 | tee /root/compiler/out.txt
+```
+基于上述流程, `autotest` 可能会报告如下错误:
+
+- **输出 C/C++/Rust 的编译错误信息:** 测试脚本未能成功编译你的编译器.
+- **CASE COMPILE ERROR:** 测试脚本在调用你的编译器编译测试用例时, 检测到你的编译器发生了错误 (编译器的返回值不为 0), 例如你的编译器崩溃了.
+- **CASE COMPILE TIME EXCEEDED:** 测试脚本在调用你的编译器编译测试用例时, 发现你的编译器运行时间过长 (超过 5 分钟).
+- **OUTPUT NOT FOUND:** 测试脚本调用你的编译器编译了测试用例, 但发现你的编译器没有把编译结果输出到命令行中指定的文件.
+- **CASE ASSEMBLE ERROR:** 测试脚本在把你的编译器编译得到的测试用例, 汇编到可执行文件的过程中, 发生了错误, 通常是因为你的编译器输出了错误的 Koopa IR/RISC-V 汇编.
+- **CASE ASSEMBLE TIME EXCEEDED:** 测试脚本在把你的编译器编译得到的测试用例, 汇编到可执行文件的过程中, 发现该流程执行时间过长 (超过 1 分钟), 通常是因为你的编译器输出了一个巨大的文件.
+- **TIME LIMIT EXCEEDED:** 测试脚本在运行你的编译器编译得到的测试用例时, 检测到运行时间过长 (超过 2 分钟), 通常是因为你的编译器生成的程序中出现了死循环.
+- **WRONG ANSWER:** 测试脚本运行了你的编译器编译得到的测试用例, 但检测到运行结果和预期结果不符.
+
+你可以根据错误的类型, 对你的编译器进行针对性的调试
+

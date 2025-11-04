@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Waline from "@/components/widgets/Waline.astro";
+import Giscus from "@/components/widgets/Giscus.astro";
 ---
 
 <BaseLayout title="board">
@@ -8,22 +8,9 @@ import Waline from "@/components/widgets/Waline.astro";
         <h1 class="text-3xl font-bold mb-2">Welcome to leave a message!</h1>
         <div class="text-base text-gray-500 mb-8" style="font-size: 0.95rem;">
             <span style="font-size:0.92em;">
-                留下QQ邮箱，可以使用QQ头像~<br />
-                或者在
-                <a
-                    href="https://gravatar.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="underline text-blue-500 hover:text-blue-700"
-                >
-                    Gravatar
-                </a>
-                设置头像~<br />
-                <span style="font-size:0.9em;color:#888;"
-                    >（看不到评论试试刷新一下~）</span
-                >
+                欢迎在这里留下你的足迹~
             </span>
         </div>
-        <Waline path="/board" />
+        <Giscus path="/board" />
     </div>
 </BaseLayout>

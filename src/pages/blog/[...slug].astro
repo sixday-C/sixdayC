@@ -7,7 +7,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import dayjs from "dayjs";
 import { DATE_FORMAT } from "@config";
 import MainCard from "@/components/MainCard.astro";
-import Waline from "@components/widgets/Waline.astro";
+import Giscus from "@components/widgets/Giscus.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -71,32 +71,8 @@ const displayDate = blog.data.pubDate
   </MainCard>
 </BaseLayout>
 
-<!-- 评论系统区域，参考 board 页面风格 -->
+<!-- 评论系统区域 -->
 <div class="w-full max-w-screen-lg mx-auto px-4 mt-12">
-  <h2 class="text-2xl font-bold mb-2">Comment</h2>
-  <div class="text-base text-gray-500 mb-8" style="font-size: 0.95rem;">
-    <span style="font-size:0.92em;">
-      留下QQ邮箱，可以使用QQ头像~<br />
-      或者在
-      <a
-        href="https://gravatar.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="underline text-blue-500 hover:text-blue-700"
-      >
-        Gravatar
-      </a>
-      设置头像~<br />
-      <span style="font-size:0.9em;color:#888;"
-        >（看不到评论试试刷新一下~）</span
-      >
-    </span>
-  </div>
-  <Waline path={`/blog/${blog.slug}`} />
+  <h2 class="text-2xl font-bold mb-4">💬 Comments</h2>
+  <Giscus path={`/blog/${blog.slug}`} />
 </div>
-<!-- <style is:global>
-  /* Content styling for code */
-  code {
-    font-size: 0.875em;
-  }
-</style> -->

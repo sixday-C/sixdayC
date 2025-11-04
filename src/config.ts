@@ -54,4 +54,16 @@ export function t(key: string): string {
   return typeof currentObj === "string" ? currentObj : key;
 }
 
-export const WALINE_SERVER_URL = "https://www.sixdayc.xyz/";
+// Giscus 评论系统配置
+export const GISCUS_CONFIG = {
+  repo: "Sixday-C/SixdayC",
+  repoId: "R_kgDOORlROQ",
+  category: "General",
+  categoryId: "DIC_kwDOORlROc4CxYtx",
+  mapping: "pathname",
+  reactionsEnabled: true,
+  emitMetadata: false,
+  inputPosition: "bottom",
+  theme: "preferred_color_scheme",
+  lang: "zh-CN",
+};

@@ -2,83 +2,55 @@
 const { path } = Astro.props;
 ---
 
-<div class="giscus-wrapper max-w-3xl mx-auto px-4 mt-8">
-  <div
-    id="giscus-container"
-    data-path={path}
-    class="rounded-xl bg-base-100 p-4 sm:p-6 border border-base-300 shadow-md"
-  >
-    <script
-      src="https://giscus.app/client.js"
-      data-repo="Sixday-C/SixdayC"
-      data-repo-id="R_kgDOORlROQ"
-      data-category="General"
-      data-category-id="DIC_kwDOORlROc4CxYtx"
-      data-mapping="pathname"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="bottom"
-      data-theme="preferred_color_scheme"
-      data-lang="zh-CN"
-      crossorigin="anonymous"
-      async>
-    </script>
-  </div>
+<div class="giscus-wrapper">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="Sixday-C/SixdayC"
+    data-repo-id="R_kgDOORlROQ"
+    data-category="General"
+    data-category-id="DIC_kwDOORlROc4CxYtx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
 </div>
-
-<style>
-  /* Giscus 主题适配 */
-  .giscus-wrapper {
-    @apply bg-base-100/50 backdrop-blur-md rounded-2xl;
-  }
-
-  /* 明亮主题 */
-  html[data-theme="light"] .giscus-wrapper {
-    --giscus-bg: #f8fafc;
-    --giscus-text: #1f2937;
-    --giscus-border: #e5e7eb;
-  }
-
-  /* 暗黑主题 */
-  html[data-theme="dark"] .giscus-wrapper {
-    --giscus-bg: #1e1e2e;
-    --giscus-text: #cececd;
-    --giscus-border: #334155;
-  }
-
-  /* 响应式布局 */
-  .giscus-wrapper .giscus {
-    @apply w-full;
-  }
-
-  .giscus-wrapper .giscus-frame {
-    @apply w-full rounded-xl;
-  }
-</style>
 
 <!-- 主题切换脚本 -->
 <script is:inline>
-  // 监听主题切换
+  // 页面加载时同步主题
   function updateGiscusTheme() {
-    const theme = document.documentElement.getAttribute('data-theme');
-    const giscusTheme = theme === 'dark' ? 'dark' : 'light';
-    
-    const iframe = document.querySelector('iframe.giscus-frame');
-    if (iframe) {
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: giscusTheme } } },
-        'https://giscus.app'
-      );
-    }
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe) return;
+
+    const theme = document.documentElement.getAttribute("data-theme") === "dark" 
+      ? "dark" 
+      : "light";
+
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme } } },
+      "https://giscus.app"
+    );
   }
 
-  // 页面加载时设置主题
-  document.addEventListener('DOMContentLoaded', () => {
+  // 监听主题切换
+  document.addEventListener("astro:page-load", () => {
+    // 等待 iframe 加载完成
+    setTimeout(updateGiscusTheme, 1000);
+
     // 监听主题变化
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-theme"
+        ) {
           updateGiscusTheme();
         }
       });
@@ -86,10 +58,28 @@ const { path } = Astro.props;
 
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-theme']
+      attributeFilter: ["data-theme"],
     });
-
-    // 初始化主题
-    setTimeout(updateGiscusTheme, 1000);
   });
 </script>
+
+<style>
+  .giscus-wrapper {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--fallback-bc, oklch(var(--bc) / 0.1));
+  }
+
+  /* 适配暗色主题 */
+  [data-theme="dark"] .giscus-wrapper {
+    border-top-color: var(--fallback-bc, oklch(var(--bc) / 0.2));
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .giscus-wrapper {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+    }
+  }
+</style>
